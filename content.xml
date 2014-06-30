@@ -1,0 +1,11 @@
+<content>
+  <folder title="Первая тестовая директория">
+    <page href="http://google.ru">Google</page>
+    <folder title="Тестовая поддиректория">
+      <page href="http://localhost/text.pdf">Теxt PDF</page>
+      <page href="http://ya.ru">Yandex</page>
+    </folder>
+    <page href="http://mail.ru">Mail.ru</page>
+  </folder>
+  <page href="http://gmail.ru">Gmail</page>
+</content>

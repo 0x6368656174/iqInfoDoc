@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/arrow.png</file>
+        <file>icons/arrow-180.png</file>
+        <file>icons/home.png</file>
+        <file>icons/magnifier.png</file>
+        <file>icons/magnifier-zoom-in.png</file>
+        <file>icons/magnifier-zoom-out.png</file>
+        <file>icons/arrow-circle-double.png</file>
+        <file>icons/document-globe.png</file>
+        <file>icons/document-pdf-text.png</file>
+        <file>icons/folder.png</file>
+        <file>icons/folder-open-document.png</file>
+        <file>icons/logo.png</file>
+        <file>icons/qt.png</file>
+    </qresource>
+</RCC>
