@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     a.setFont(defaultFont);
 
     QApplication::setOrganizationName("itQuasar");
-    QApplication::setApplicationName("iqHelpViewer");
+    QApplication::setApplicationName("iqInfoDoc");
     IqHelpViewerMainWindow w;
     w.show();
 
