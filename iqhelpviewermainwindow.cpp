@@ -85,6 +85,8 @@ IqHelpViewerMainWindow::IqHelpViewerMainWindow(QWidget *parent) :
 
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAbout()));
     ui->helpToolBar->addAction(ui->actionAbout);
+		
+		ui->helpToolBar->hide();
 
     //WEB view
     IqWebHelpView *webView = new IqWebHelpView(this);
