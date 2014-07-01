@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QRadioButton>
 #include <QStack>
 #include <QWidget>
 #include "iqhelpviewwidget.h"
@@ -36,6 +37,7 @@ private slots:
     void findText();
     void showAbout();
     void showAboutQt();
+    void rusificateFindString();
 
 private:
     Ui::IqHelpViewerMainWindow *ui;
@@ -44,6 +46,8 @@ private:
     QLabel *_findLabel;
     QLabel *_scaleLabel;
     QComboBox *_scaleComboBox;
+    QRadioButton *_latLocaleButton;
+    QRadioButton *_rusLocaleButton;
     QList<IqHelpViewWidget *> _helpViewWidgets;
     IqHelpViewWidget *_currentView;
     QList<QUrl> _history;
@@ -51,6 +55,8 @@ private:
     int _currentHistoryIndex;
     bool _backOrForward;
 
+    QString rus(const QString &lat) const;
+    QString lat(const QString &rus) const;
     void setCurrentView(IqHelpViewWidget * view);
     void checkBackForwardEnabled();
     void addUrlToHistory(const QUrl &url);
