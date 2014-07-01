@@ -15,6 +15,8 @@ IqHelpViewerMainWindow::IqHelpViewerMainWindow(QWidget *parent) :
     _findLabel(new QLabel(this)),
     _scaleLabel(new QLabel(this)),
     _scaleComboBox(new QComboBox(this)),
+    _latLocaleButton(new QRadioButton(this)),
+    _rusLocaleButton(new QRadioButton(this)),
     _currentView(NULL),
     _mainWidget(new QWidget()),
     _currentHistoryIndex(0),
@@ -71,12 +73,21 @@ IqHelpViewerMainWindow::IqHelpViewerMainWindow(QWidget *parent) :
     ui->toolsToolBar->addWidget(_findLabel);
     _findStringLineEdit->setMaximumWidth(150);
 
-//    connect(_findStringLineEdit, SIGNAL(textChanged(QString)), this, SLOT(findText()));
+    connect(_findStringLineEdit, SIGNAL(textChanged(QString)), this, SLOT(rusificateFindString()));
     connect(_findStringLineEdit, SIGNAL(returnPressed()), this, SLOT(findText()));
     ui->toolsToolBar->addWidget(_findStringLineEdit);
 
     connect(ui->actionFindNext, SIGNAL(triggered()), this, SLOT(findText()));
     ui->toolsToolBar->addAction(ui->actionFindNext);
+    
+    _latLocaleButton->setText(tr("lat"));
+    _latLocaleButton->setChecked(true);
+    connect(_latLocaleButton, SIGNAL(clicked()), this, SLOT(rusificateFindString()));
+    ui->toolsToolBar->addWidget(_latLocaleButton);
+
+    _rusLocaleButton->setText(tr("rus"));
+    connect(_rusLocaleButton, SIGNAL(clicked()), this, SLOT(rusificateFindString()));
+    ui->toolsToolBar->addWidget(_rusLocaleButton);
 
     insertToolBarBreak(ui->toolsToolBar);
 
@@ -115,6 +126,84 @@ IqHelpViewerMainWindow::IqHelpViewerMainWindow(QWidget *parent) :
 IqHelpViewerMainWindow::~IqHelpViewerMainWindow()
 {
     delete ui;
+}
+
+void IqHelpViewerMainWindow::rusificateFindString()
+{
+    if (_rusLocaleButton->isChecked())
+    {
+        _findStringLineEdit->setText(rus(_findStringLineEdit->text()));
+    }
+    else
+    {
+        _findStringLineEdit->setText(lat(_findStringLineEdit->text()));
+    }
+}
+
+QString IqHelpViewerMainWindow::rus(const QString& lat) const
+{
+    QString latL = "1234567890-=\\qwertyuiop[]asdfghjkl;'zxcvbnm,./";
+	QString latU = "!@#$%^&*()_+|QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?";
+    QString rusL = tr("1234567890-=\\qwertyuiop[]asdfghjkl;'zxcvbnm,./");
+    QString rusU = tr("!@#$%^&*()_+|QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?");
+	
+	QString result;
+	for(int i = 0; i < lat.count(); i++)
+	{
+	    QChar ch = lat.at(i);
+		int lowIndex = latL.indexOf(ch);
+		if (lowIndex != -1)
+		{
+		    result += rusL.at(lowIndex);
+		}
+		else
+		{
+		    int upIndex = latU.indexOf(ch);
+			if (upIndex != -1)
+			{
+			    result += rusU.at(upIndex);
+			}
+			else
+			{
+			    result += ch;
+			}
+		}
+	}
+	
+    return result;
+}
+
+QString IqHelpViewerMainWindow::lat(const QString& rus) const
+{
+    QString latL = "1234567890-=\\qwertyuiop[]asdfghjkl;'zxcvbnm,./";
+    QString latU = "!@#$%^&*()_+|QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?";
+    QString rusL = tr("1234567890-=\\qwertyuiop[]asdfghjkl;'zxcvbnm,./");
+    QString rusU = tr("!@#$%^&*()_+|QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?");
+
+    QString result;
+    for(int i = 0; i < rus.count(); i++)
+    {
+        QChar ch = rus.at(i);
+        int lowIndex = rusL.indexOf(ch);
+        if (lowIndex != -1)
+        {
+            result += latL.at(lowIndex);
+        }
+        else
+        {
+            int upIndex = rusU.indexOf(ch);
+            if (upIndex != -1)
+            {
+                result += latU.at(upIndex);
+            }
+            else
+            {
+                result += ch;
+            }
+        }
+    }
+
+    return result;
 }
 
 void IqHelpViewerMainWindow::showPage(const QUrl &url)
