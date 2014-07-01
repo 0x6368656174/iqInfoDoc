@@ -260,42 +260,64 @@ Author: Software group, Puckov P.A.</source>
         <translation>О приложении InfoDoc</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="43"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="45"/>
         <source>Scale: </source>
         <translation>Маштаб:</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="70"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="72"/>
         <source>Find: </source>
         <translation>Найти:</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="246"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="83"/>
+        <source>lat</source>
+        <translation>lat</translation>
+    </message>
+    <message>
+        <location filename="iqhelpviewermainwindow.cpp" line="88"/>
+        <source>rus</source>
+        <translation>рус</translation>
+    </message>
+    <message>
+        <location filename="iqhelpviewermainwindow.cpp" line="147"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="180"/>
+        <source>1234567890-=\qwertyuiop[]asdfghjkl;&apos;zxcvbnm,./</source>
+        <translation>1234567890-=\йцукенгшщзхъфывапролджэячсмитьбю.</translation>
+    </message>
+    <message>
+        <location filename="iqhelpviewermainwindow.cpp" line="148"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="181"/>
+        <source>!@#$%^&amp;*()_+|QWERTYUIOP{}ASDFGHJKL:&quot;ZXCVBNM&lt;&gt;?</source>
+        <translation>!&quot;№;%:?*()_+/ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,</translation>
+    </message>
+    <message>
+        <location filename="iqhelpviewermainwindow.cpp" line="337"/>
         <source>Loading%0 %1%...</source>
         <translation>Загрузка %0 %1%...</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="258"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="349"/>
         <source>Start loading%0...</source>
         <translation>Начата загрузка %0...</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="267"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="358"/>
         <source>Loading fauled!</source>
         <translation>Загрузка не удалась!</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="274"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="365"/>
         <source>Lading%0 finish.</source>
         <translation>Загрузка %0 завершена.</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="387"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="478"/>
         <source>About InfoDoc</source>
         <translation>О InfoDoc</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="388"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="479"/>
         <source>InfoDoc is cross-platform application to view help information for Sintez R2 ATC system.
 
 Allow to display pages as HTML or PDF formats.
@@ -311,14 +333,14 @@ Author: Software group, Puckov P.A.</source>
 <context>
     <name>IqPdfHelpView</name>
     <message>
-        <location filename="iqpdfhelpview.cpp" line="88"/>
+        <location filename="iqpdfhelpview.cpp" line="93"/>
         <source>PDF data gets.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="iqpdfhelpview.cpp" line="93"/>
-        <location filename="iqpdfhelpview.cpp" line="112"/>
-        <location filename="iqpdfhelpview.cpp" line="144"/>
+        <location filename="iqpdfhelpview.cpp" line="98"/>
+        <location filename="iqpdfhelpview.cpp" line="117"/>
+        <location filename="iqpdfhelpview.cpp" line="149"/>
         <source>Error on parse PDF.</source>
         <translation></translation>
     </message>
@@ -326,24 +348,20 @@ Author: Software group, Puckov P.A.</source>
 <context>
     <name>IqWebView</name>
     <message>
-        <location filename="iqwebview.cpp" line="18"/>
         <source>image</source>
-        <translation>изображ</translation>
+        <translation type="obsolete">изображ</translation>
     </message>
     <message>
-        <location filename="iqwebview.cpp" line="19"/>
         <source>new window</source>
-        <translation>окн</translation>
+        <translation type="obsolete">окн</translation>
     </message>
     <message>
-        <location filename="iqwebview.cpp" line="20"/>
         <source>frame</source>
-        <translation>фрейм</translation>
+        <translation type="obsolete">фрейм</translation>
     </message>
     <message>
-        <location filename="iqwebview.cpp" line="21"/>
         <source>save</source>
-        <translation>сохран</translation>
+        <translation type="obsolete">сохран</translation>
     </message>
 </context>
 <context>
