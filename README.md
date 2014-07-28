@@ -5,17 +5,17 @@ iqInfoDoc - приложение для просмотра справочной 
 Установка iqInfoDoc
 -------------------
 Для установки iqInfoDoc необходимо выполнить следующие действия:
-1. С рабочего места, на котором установлен iqInfoDoc, скопировать папки */opt/csw* и */sintez/sintez/bin/iqInfoDoc/* в одноименные папки на рабочее место, на которое необходимо установить iqInfoDoc.
-2. На целевом рабочем месте запустить и закрыть iqInfoDoc командой *LD_LIBRARY_PATH=/opt/csw/lib /sintez/sintez/bin/iqInfoDoc/iqInfoDoc*. После этого будет создан файл */sintez/sintez/.config/itQuasar/iqInfoDoc.conf* с настройками.
-3. Отредактировать настройки в файле */sintez/sintez/.config/itQuasar/iqInfoDoc.conf*.
-4. При необходимости добавить iqInfoDoc в автоматический запуск, через startfile. Для этого необходимо отредактировать файл */sintez/sintez/startfile_atd* (для рабочих мест) или */sintez/sintez/startfile_stuk* (для СТУК), добавив в него строки:
+* С рабочего места, на котором установлен iqInfoDoc, скопировать папки */opt/csw* и */sintez/sintez/bin/iqInfoDoc/* в одноименные папки на рабочее место, на которое необходимо установить iqInfoDoc.
+* На целевом рабочем месте запустить и закрыть iqInfoDoc командой *LD_LIBRARY_PATH=/opt/csw/lib /sintez/sintez/bin/iqInfoDoc/iqInfoDoc*. После этого будет создан файл */sintez/sintez/.config/itQuasar/iqInfoDoc.conf* с настройками.
+* Отредактировать настройки в файле */sintez/sintez/.config/itQuasar/iqInfoDoc.conf*.
+* При необходимости добавить iqInfoDoc в автоматический запуск, через startfile. Для этого необходимо отредактировать файл */sintez/sintez/startfile_atd* (для рабочих мест) или */sintez/sintez/startfile_stuk* (для СТУК), добавив в него строки:
 ~~~~~~~~{bash}    
     #------------iqInfoDoc---------------
     cd /sintez/sintez/bin/iqInfoDoc
     LD_LIBRARY_PATH=/opt/csw/lib $uexec "./iqInfoDoc -style=Plastique > /dev/null 2>&1 &"
 ~~~~~~~~
-5. При необходимости отключить автоматический запуск InfoDoc, закомментировать строку `$uexec "java -jar InfoDoc.jar >/dev/null 2>&1 &"` в файле автоматического запуска (см. предыдущий пункт).
-6. Перезагрузить все процессы на рабочем месте.
+* При необходимости отключить автоматический запуск InfoDoc, закомментировать строку `$uexec "java -jar InfoDoc.jar >/dev/null 2>&1 &"` в файле автоматического запуска (см. предыдущий пункт).
+* Перезагрузить все процессы на рабочем месте.
 
 Настройка iqInfoDoc
 -------------------
