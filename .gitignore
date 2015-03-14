@@ -17,7 +17,8 @@
 *.pro.user
 *.pro.user.*
 *.moc
-automoc_*.cpp
+*automoc.cpp
+qrc.depends
 moc_*.cpp
 qrc_*.cpp
 ui_*.h
@@ -31,6 +32,8 @@ Makefile*
 # Cmake
 CMakeLists.txt.user
 CMakeLists.txt.user.*
+cmake_install.cmake
+CMakeFiles/
 
 # Vim
 *~
