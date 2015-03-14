@@ -35,8 +35,8 @@ public:
 
 
 private:
-    QFrame *_frame;
-    IqWebView *_webView;
+    QFrame *m_frame;
+    IqWebView *m_webView;
 };
 
 #endif // IQWEBHELPVIEW_H

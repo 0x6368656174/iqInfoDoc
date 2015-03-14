@@ -5,45 +5,44 @@
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include "iqwebhelpview.h"
-#include "iqpdfhelpview.h"
 
 IqHelpViewerMainWindow::IqHelpViewerMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::IqHelpViewerMainWindow),
-    _urlLineEdit(new QLineEdit(this)),
-    _findStringLineEdit(new QLineEdit(this)),
-    _findLabel(new QLabel(this)),
-    _scaleLabel(new QLabel(this)),
-    _scaleComboBox(new QComboBox(this)),
-    _latLocaleButton(new QRadioButton(this)),
-    _rusLocaleButton(new QRadioButton(this)),
-    _currentView(NULL),
-    _mainWidget(new QWidget()),
-    _currentHistoryIndex(0),
-    _backOrForward(false)
+    m_urlLineEdit(new QLineEdit(this)),
+    m_findStringLineEdit(new QLineEdit(this)),
+    m_findLabel(new QLabel(this)),
+    m_scaleLabel(new QLabel(this)),
+    m_scaleComboBox(new QComboBox(this)),
+    m_latLocaleButton(new QRadioButton(this)),
+    m_rusLocaleButton(new QRadioButton(this)),
+    m_currentView(NULL),
+    m_mainWidget(new QWidget()),
+    m_currentHistoryIndex(0),
+    m_backOrForward(false)
 {   
     ui->setupUi(this);
 
     QHBoxLayout *layout = new QHBoxLayout();
-    _mainWidget->setLayout(layout);
-    setCentralWidget(_mainWidget);
+    m_mainWidget->setLayout(layout);
+    setCentralWidget(m_mainWidget);
 
-    connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(showHomePage()));
+    connect(ui->actionHome, &QAction::triggered, this, &IqHelpViewerMainWindow::showHomePage);
     ui->navigationToolBar->addAction(ui->actionHome);
 
-    connect(ui->actionBack, SIGNAL(triggered()), this, SLOT(back()));
+    connect(ui->actionBack, &QAction::triggered, this, &IqHelpViewerMainWindow::back);
     ui->navigationToolBar->addAction(ui->actionBack);
 
-    connect(ui->actionForward, SIGNAL(triggered()), this, SLOT(forward()));
+    connect(ui->actionForward, &QAction::triggered, this, &IqHelpViewerMainWindow::forward);
     ui->navigationToolBar->addAction(ui->actionForward);
 
     ui->navigationToolBar->addAction(ui->actionRefresh);
 
-    _urlLineEdit->setReadOnly(true);
-    ui->navigationToolBar->addWidget(_urlLineEdit);
+    m_urlLineEdit->setReadOnly(true);
+    ui->navigationToolBar->addWidget(m_urlLineEdit);
 
-    _scaleLabel->setText(tr("Scale: "));
-    ui->toolsToolBar->addWidget(_scaleLabel);
+    m_scaleLabel->setText(tr("Scale: "));
+    ui->toolsToolBar->addWidget(m_scaleLabel);
 
     QSettings settings;
     if (!settings.contains("scaleFactors"))
@@ -52,70 +51,67 @@ IqHelpViewerMainWindow::IqHelpViewerMainWindow(QWidget *parent) :
         scaleFactors << "200" << "150" << "125" << "100" << "75" << "50" << "25";
         settings.setValue("scaleFactors", scaleFactors);
     }
-    _scaleComboBox->setEditable(true);
-    _scaleComboBox->setMinimumWidth(50);
+    m_scaleComboBox->setEditable(true);
+    m_scaleComboBox->setMinimumWidth(50);
     QStringList scaleFactors = settings.value("scaleFactors").toStringList();
-    _scaleComboBox->addItems(scaleFactors);
-//    _scaleComboBox->setCurrentText("100");
-    _scaleComboBox->setEditText("100");
-//    connect(_scaleComboBox, SIGNAL(currentTextChanged(QString)), this, SLOT(setZoomFactor(QString)));
-    connect(_scaleComboBox, SIGNAL(editTextChanged(QString)), this, SLOT(setZoomFactor(QString)));
-    ui->toolsToolBar->addWidget(_scaleComboBox);
+    m_scaleComboBox->addItems(scaleFactors);
+    m_scaleComboBox->setEditText("100");
+    connect(m_scaleComboBox, &QComboBox::editTextChanged, this, &IqHelpViewerMainWindow::setZoomFactor);
+    ui->toolsToolBar->addWidget(m_scaleComboBox);
 
-    connect(ui->actionZoomIn, SIGNAL(triggered()), this, SLOT(zoomIn()));
+    connect(ui->actionZoomIn, &QAction::triggered, this, &IqHelpViewerMainWindow::zoomIn);
     ui->toolsToolBar->addAction(ui->actionZoomOut);
 
-    connect(ui->actionZoomOut, SIGNAL(triggered()), this, SLOT(zoomOut()));
+    connect(ui->actionZoomOut, &QAction::triggered, this, &IqHelpViewerMainWindow::zoomOut);
     ui->toolsToolBar->addAction(ui->actionZoomIn);
 
     ui->toolsToolBar->addSeparator();
-    _findLabel->setText(tr("Find: "));
-    ui->toolsToolBar->addWidget(_findLabel);
-    _findStringLineEdit->setMaximumWidth(150);
+    m_findLabel->setText(tr("Find: "));
+    ui->toolsToolBar->addWidget(m_findLabel);
+    m_findStringLineEdit->setMaximumWidth(150);
 
-    connect(_findStringLineEdit, SIGNAL(textChanged(QString)), this, SLOT(rusificateFindString()));
-    connect(_findStringLineEdit, SIGNAL(returnPressed()), this, SLOT(findText()));
-    ui->toolsToolBar->addWidget(_findStringLineEdit);
+    connect(m_findStringLineEdit, &QLineEdit::textChanged, this, &IqHelpViewerMainWindow::rusificateFindString);
+    connect(m_findStringLineEdit, &QLineEdit::returnPressed, this, &IqHelpViewerMainWindow::findText);
+    ui->toolsToolBar->addWidget(m_findStringLineEdit);
 
-    connect(ui->actionFindNext, SIGNAL(triggered()), this, SLOT(findText()));
+    connect(ui->actionFindNext, &QAction::triggered, this, &IqHelpViewerMainWindow::findText);
     ui->toolsToolBar->addAction(ui->actionFindNext);
     
-    _latLocaleButton->setText(tr("lat"));
-    _latLocaleButton->setChecked(true);
-    connect(_latLocaleButton, SIGNAL(clicked()), this, SLOT(rusificateFindString()));
-    ui->toolsToolBar->addWidget(_latLocaleButton);
+    m_latLocaleButton->setText(tr("lat"));
+    m_latLocaleButton->setChecked(true);
+    connect(m_latLocaleButton, &QAbstractButton::clicked, this, &IqHelpViewerMainWindow::rusificateFindString);
+    ui->toolsToolBar->addWidget(m_latLocaleButton);
 
-    _rusLocaleButton->setText(tr("rus"));
-    connect(_rusLocaleButton, SIGNAL(clicked()), this, SLOT(rusificateFindString()));
-    ui->toolsToolBar->addWidget(_rusLocaleButton);
+    m_rusLocaleButton->setText(tr("rus"));
+    connect(m_rusLocaleButton, &QAbstractButton::clicked, this, &IqHelpViewerMainWindow::rusificateFindString);
+    ui->toolsToolBar->addWidget(m_rusLocaleButton);
 
     insertToolBarBreak(ui->toolsToolBar);
 
-    connect(ui->actionAboutQt, SIGNAL(triggered()), this, SLOT(showAboutQt()));
+    connect(ui->actionAboutQt, &QAction::triggered, this, &IqHelpViewerMainWindow::showAboutQt);
     ui->helpToolBar->addAction(ui->actionAboutQt);
 
-    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAbout()));
+    connect(ui->actionAbout, &QAction::triggered, this, &IqHelpViewerMainWindow::showAbout);
     ui->helpToolBar->addAction(ui->actionAbout);
 		
 		ui->helpToolBar->hide();
 
     //WEB view
     IqWebHelpView *webView = new IqWebHelpView(this);
-    _mainWidget->layout()->addWidget(webView->widget());
-    _helpViewWidgets << webView;
+    m_mainWidget->layout()->addWidget(webView->widget());
+    m_helpViewWidgets << webView;
 
-    //PDF view
-    IqPdfHelpView *pdfVier = new IqPdfHelpView(this);
-    _mainWidget->layout()->addWidget(pdfVier->widget());
-    _helpViewWidgets << pdfVier;
+//    //PDF view
+//    IqPdfHelpView *pdfVier = new IqPdfHelpView(this);
+//    m_mainWidget->layout()->addWidget(pdfVier->widget());
+//    m_helpViewWidgets << pdfVier;
 
     checkBackForwardEnabled();
 
     //Content view
-    connect(ui->contentTreeWidget, SIGNAL(linkClicked(QUrl)), this, SLOT(showPage(QUrl)));
+    connect(ui->contentTreeWidget, &IqContentWidget::linkClicked, this, &IqHelpViewerMainWindow::showPage);
     ui->contentTreeWidget->header()->hide();
-    if (!settings.contains("contentUrl"))
-    {
+    if (!settings.contains("contentUrl")) {
         settings.setValue("contentUrl", "http://localhost/content.xml");
     }
     ui->contentTreeWidget->loadContent(settings.value("contentUrl").toString());
@@ -130,13 +126,11 @@ IqHelpViewerMainWindow::~IqHelpViewerMainWindow()
 
 void IqHelpViewerMainWindow::rusificateFindString()
 {
-    if (_rusLocaleButton->isChecked())
-    {
-        _findStringLineEdit->setText(rus(_findStringLineEdit->text()));
+    if (m_rusLocaleButton->isChecked()) {
+        m_findStringLineEdit->setText(rus(m_findStringLineEdit->text()));
     }
-    else
-    {
-        _findStringLineEdit->setText(lat(_findStringLineEdit->text()));
+    else {
+        m_findStringLineEdit->setText(lat(m_findStringLineEdit->text()));
     }
 }
 
@@ -148,23 +142,18 @@ QString IqHelpViewerMainWindow::rus(const QString& lat) const
     QString rusU = tr("!@#$%^&*()_+|QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?");
 	
 	QString result;
-	for(int i = 0; i < lat.count(); i++)
-	{
+    for(int i = 0; i < lat.count(); i++) {
 	    QChar ch = lat.at(i);
 		int lowIndex = latL.indexOf(ch);
-		if (lowIndex != -1)
-		{
+        if (lowIndex != -1) {
 		    result += rusL.at(lowIndex);
 		}
-		else
-		{
+        else {
 		    int upIndex = latU.indexOf(ch);
-			if (upIndex != -1)
-			{
+            if (upIndex != -1) {
 			    result += rusU.at(upIndex);
 			}
-			else
-			{
+            else {
 			    result += ch;
 			}
 		}
@@ -181,23 +170,18 @@ QString IqHelpViewerMainWindow::lat(const QString& rus) const
     QString rusU = tr("!@#$%^&*()_+|QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?");
 
     QString result;
-    for(int i = 0; i < rus.count(); i++)
-    {
+    for(int i = 0; i < rus.count(); i++) {
         QChar ch = rus.at(i);
         int lowIndex = rusL.indexOf(ch);
-        if (lowIndex != -1)
-        {
+        if (lowIndex != -1) {
             result += latL.at(lowIndex);
         }
-        else
-        {
+        else {
             int upIndex = rusU.indexOf(ch);
-            if (upIndex != -1)
-            {
+            if (upIndex != -1) {
                 result += latU.at(upIndex);
             }
-            else
-            {
+            else {
                 result += ch;
             }
         }
@@ -211,14 +195,11 @@ void IqHelpViewerMainWindow::showPage(const QUrl &url)
     qDebug() << "showPage";
     IqHelpViewWidget *view = NULL;
 
-    if (_currentView && _currentView->canShowPage(url))
-    {
-        view = _currentView;
+    if (m_currentView && m_currentView->canShowPage(url)) {
+        view = m_currentView;
     }
-    else
-    {
-        foreach (IqHelpViewWidget *viewCandidate, _helpViewWidgets)
-        {
+    else {
+        foreach (IqHelpViewWidget *viewCandidate, m_helpViewWidgets) {
             if (!viewCandidate)
                 continue;
             if (!viewCandidate->canShowPage(url))
@@ -229,11 +210,10 @@ void IqHelpViewerMainWindow::showPage(const QUrl &url)
         }
     }
 
-    if (view)
-    {
+    if (view) {
         setCurrentView(view);
 
-        _urlLineEdit->setText(url.toString());
+        m_urlLineEdit->setText(url.toString());
 
         view->showPage(url);
     }
@@ -242,30 +222,27 @@ void IqHelpViewerMainWindow::showPage(const QUrl &url)
 void IqHelpViewerMainWindow::addUrlToHistory(const QUrl &url)
 {
     qDebug() << "addUrlToHistory";
-    if (!_backOrForward)
-    {
-        for (int i = _currentHistoryIndex + 1; i < _history.count(); i++)
-        {
-            _history.removeLast();
+    if (!m_backOrForward) {
+        for (int i = m_currentHistoryIndex + 1; i < m_history.count(); i++) {
+            m_history.removeLast();
         }
-        if (_history.count() == 0 || _history.last() != url)
-            _history << url;
-        _currentHistoryIndex = _history.count() - 1;
+        if (m_history.count() == 0 || m_history.last() != url)
+            m_history << url;
+        m_currentHistoryIndex = m_history.count() - 1;
     }
-    _backOrForward = false;
+    m_backOrForward = false;
 
     checkBackForwardEnabled();
 }
 
 void IqHelpViewerMainWindow::setCurrentView(IqHelpViewWidget *view)
 {
-    if (_currentView == view)
+    if (m_currentView == view)
         return;
 
-    if (_currentView)
-    {
-        disconnect(_currentView, 0, this, 0);
-        disconnect(ui->actionRefresh, 0, _currentView, 0);
+    if (m_currentView) {
+        disconnect(m_currentView, 0, this, 0);
+        disconnect(ui->actionRefresh, 0, m_currentView, 0);
     }
 
     if (!view)
@@ -275,17 +252,16 @@ void IqHelpViewerMainWindow::setCurrentView(IqHelpViewWidget *view)
     if (!widget)
         return;
 
-    _currentView = view;
-    connect(view, SIGNAL(linkClicked(QUrl)), this, SLOT(showPage(QUrl)));
-    connect(view, SIGNAL(loadProgress(int)), this, SLOT(setLoadProgress(int)));
-    connect(view, SIGNAL(loadStarted()), this, SLOT(onLoadStarted()));
-    connect(view, SIGNAL(loadFinished(bool)), this, SLOT(onLoadFinished(bool)));
-    connect(view, SIGNAL(linkHovered(QString,QString,QString)), this, SLOT(showLinkTitle(QString,QString,QString)));
+    m_currentView = view;
+    connect(view, &IqHelpViewWidget::linkClicked, this, &IqHelpViewerMainWindow::showPage);
+    connect(view, &IqHelpViewWidget::loadProgress, this, &IqHelpViewerMainWindow::setLoadProgress);
+    connect(view, &IqHelpViewWidget::loadStarted, this, &IqHelpViewerMainWindow::onLoadStarted);
+    connect(view, &IqHelpViewWidget::loadFinished, this, &IqHelpViewerMainWindow::onLoadFinished);
+    connect(view, &IqHelpViewWidget::linkHovered, this, &IqHelpViewerMainWindow::showLinkTitle);
 
-    connect(ui->actionRefresh, SIGNAL(triggered()), view, SLOT(reload()));
+    connect(ui->actionRefresh, &QAction::triggered, view, &IqHelpViewWidget::reload);
 
-    foreach (IqHelpViewWidget *view, _helpViewWidgets)
-    {
+    foreach (IqHelpViewWidget *view, m_helpViewWidgets) {
         if (view && view->widget())
             view->widget()->hide();
     }
@@ -296,8 +272,7 @@ void IqHelpViewerMainWindow::setCurrentView(IqHelpViewWidget *view)
 void IqHelpViewerMainWindow::showHomePage()
 {
     QSettings setting;
-    if (!setting.contains("homePage"))
-    {
+    if (!setting.contains("homePage")) {
         setting.setValue("homePage", "http://google.com");
     }
     QString homePage = setting.value("homePage").toString();
@@ -307,35 +282,35 @@ void IqHelpViewerMainWindow::showHomePage()
 
 void IqHelpViewerMainWindow::back()
 {
-    if (_currentHistoryIndex == 0)
+    if (m_currentHistoryIndex == 0)
         return;
 
-    _backOrForward = true;
+    m_backOrForward = true;
 
-    _currentHistoryIndex--;
+    m_currentHistoryIndex--;
     checkBackForwardEnabled();
-    showPage(_history[_currentHistoryIndex]);
+    showPage(m_history[m_currentHistoryIndex]);
 }
 
 void IqHelpViewerMainWindow::forward()
 {
-    if (_currentHistoryIndex == _history.count() - 1)
+    if (m_currentHistoryIndex == m_history.count() - 1)
         return;
 
-    _backOrForward = true;
+    m_backOrForward = true;
 
-    _currentHistoryIndex++;
+    m_currentHistoryIndex++;
     checkBackForwardEnabled();
-    showPage(_history[_currentHistoryIndex]);
+    showPage(m_history[m_currentHistoryIndex]);
 }
 
 void IqHelpViewerMainWindow::setLoadProgress(const int progress)
 {
-    if (!_currentView)
+    if (!m_currentView)
         return;
 
     ui->statusBar->showMessage(tr("Loading%0 %1%...")
-                               .arg(_currentView->title().isEmpty()?"":" \"" + _currentView->title() + "\"")
+                               .arg(m_currentView->title().isEmpty()?"":" \"" + m_currentView->title() + "\"")
                                .arg(progress));
 }
 
@@ -343,11 +318,11 @@ void IqHelpViewerMainWindow::onLoadStarted()
 {
     qDebug() << "onLoadStarted";
 
-    if (!_currentView)
+    if (!m_currentView)
         return;
 
     ui->statusBar->showMessage(tr("Start loading%0...")
-                               .arg(_currentView->title().isEmpty()?"":" \"" + _currentView->title() + "\""));
+                               .arg(m_currentView->title().isEmpty()?"":" \"" + m_currentView->title() + "\""));
 }
 
 void IqHelpViewerMainWindow::onLoadFinished(bool ok)
@@ -359,34 +334,30 @@ void IqHelpViewerMainWindow::onLoadFinished(bool ok)
         return;
     }
 
-    if (!_currentView)
+    if (!m_currentView)
         return;
 
     ui->statusBar->showMessage(tr("Lading%0 finish.")
-                               .arg(_currentView->title().isEmpty()?"":" \"" + _currentView->title() + "\""));
+                               .arg(m_currentView->title().isEmpty()?"":" \"" + m_currentView->title() + "\""));
 
-    _urlLineEdit->setText(_currentView->url().toString());
+    m_urlLineEdit->setText(m_currentView->url().toString());
 
-    addUrlToHistory(_currentView->url());
+    addUrlToHistory(m_currentView->url());
 }
 
 void IqHelpViewerMainWindow::checkBackForwardEnabled()
 {
-    if (_currentHistoryIndex <= 0)
-    {
+    if (m_currentHistoryIndex <= 0) {
         ui->actionBack->setEnabled(false);
     }
-    else
-    {
+    else {
         ui->actionBack->setEnabled(true);
     }
 
-    if (_currentHistoryIndex >= _history.count() - 1)
-    {
+    if (m_currentHistoryIndex >= m_history.count() - 1) {
         ui->actionForward->setEnabled(false);
     }
-    else
-    {
+    else {
         ui->actionForward->setEnabled(true);
     }
 }
@@ -394,8 +365,7 @@ void IqHelpViewerMainWindow::checkBackForwardEnabled()
 void IqHelpViewerMainWindow::showLinkTitle(const QString &link, const QString &title, const QString &textContent)
 {
     Q_UNUSED(title);
-    if (link.isEmpty())
-    {
+    if (link.isEmpty()) {
         ui->statusBar->clearMessage();
         return;
     }
@@ -406,7 +376,7 @@ void IqHelpViewerMainWindow::showLinkTitle(const QString &link, const QString &t
 
 void IqHelpViewerMainWindow::setZoomFactor(const QString &factor)
 {
-    if (!_currentView)
+    if (!m_currentView)
         return;
 
     bool ok = false;
@@ -417,15 +387,15 @@ void IqHelpViewerMainWindow::setZoomFactor(const QString &factor)
     if (factorInt < 1 || factorInt > 100000)
         return;
 
-    _currentView->setZoomFactor((qreal)factorInt/100);
+    m_currentView->setZoomFactor((qreal)factorInt/100);
 }
 
 void IqHelpViewerMainWindow::zoomIn()
 {
-    if (!_currentView)
+    if (!m_currentView)
         return;
 
-    QString factor = _scaleComboBox->currentText();
+    QString factor = m_scaleComboBox->currentText();
     bool ok = false;
     int factorInt = factor.toInt(&ok);
     if (!ok)
@@ -436,16 +406,15 @@ void IqHelpViewerMainWindow::zoomIn()
     if (factorInt < 1 || factorInt > 100000)
         return;
 
-//    _scaleComboBox->setCurrentText(QString::number(factorInt));
-    _scaleComboBox->setEditText(QString::number(factorInt));
+    m_scaleComboBox->setEditText(QString::number(factorInt));
 }
 
 void IqHelpViewerMainWindow::zoomOut()
 {
-    if (!_currentView)
+    if (!m_currentView)
         return;
 
-    QString factor = _scaleComboBox->currentText();
+    QString factor = m_scaleComboBox->currentText();
     bool ok = false;
     int factorInt = factor.toInt(&ok);
     if (!ok)
@@ -456,16 +425,15 @@ void IqHelpViewerMainWindow::zoomOut()
     if (factorInt < 1 || factorInt > 100000)
         return;
 
-//    _scaleComboBox->setCurrentText(QString::number(factorInt));
-    _scaleComboBox->setEditText(QString::number(factorInt));
+    m_scaleComboBox->setEditText(QString::number(factorInt));
 }
 
 void IqHelpViewerMainWindow::findText()
 {
-    if (!_currentView)
+    if (!m_currentView)
         return;
 
-    _currentView->findText(_findStringLineEdit->text());
+    m_currentView->findText(m_findStringLineEdit->text());
 }
 
 void IqHelpViewerMainWindow::showAboutQt()

@@ -22,7 +22,7 @@ public:
     explicit IqHelpViewerMainWindow(QWidget *parent = 0);
     ~IqHelpViewerMainWindow();
 
-private slots:
+private:
     void showHomePage();
     void showPage(const QUrl &url);
     void onLoadFinished(bool ok);
@@ -38,28 +38,27 @@ private slots:
     void showAbout();
     void showAboutQt();
     void rusificateFindString();
-
-private:
-    Ui::IqHelpViewerMainWindow *ui;
-    QLineEdit *_urlLineEdit;
-    QLineEdit *_findStringLineEdit;
-    QLabel *_findLabel;
-    QLabel *_scaleLabel;
-    QComboBox *_scaleComboBox;
-    QRadioButton *_latLocaleButton;
-    QRadioButton *_rusLocaleButton;
-    QList<IqHelpViewWidget *> _helpViewWidgets;
-    IqHelpViewWidget *_currentView;
-    QList<QUrl> _history;
-    QWidget *_mainWidget;
-    int _currentHistoryIndex;
-    bool _backOrForward;
-
     QString rus(const QString &lat) const;
     QString lat(const QString &rus) const;
     void setCurrentView(IqHelpViewWidget * view);
     void checkBackForwardEnabled();
     void addUrlToHistory(const QUrl &url);
+
+private:
+    Ui::IqHelpViewerMainWindow *ui;
+    QLineEdit *m_urlLineEdit;
+    QLineEdit *m_findStringLineEdit;
+    QLabel *m_findLabel;
+    QLabel *m_scaleLabel;
+    QComboBox *m_scaleComboBox;
+    QRadioButton *m_latLocaleButton;
+    QRadioButton *m_rusLocaleButton;
+    QList<IqHelpViewWidget *> m_helpViewWidgets;
+    IqHelpViewWidget *m_currentView;
+    QList<QUrl> m_history;
+    QWidget *m_mainWidget;
+    int m_currentHistoryIndex;
+    bool m_backOrForward;
 };
 
 #endif // IQHELPVIEWERMAINWINDOW_H

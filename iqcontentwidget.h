@@ -5,7 +5,7 @@
 #include <QXmlStreamReader>
 #include <QIcon>
 #include <QBuffer>
-#include <QHttp>
+#include <QNetworkAccessManager>
 
 class IqContentWidget : public QTreeWidget
 {
@@ -18,24 +18,22 @@ public:
 signals:
     void linkClicked(const QUrl &url);
 
-private slots:
-    void changeFolderIcon(QTreeWidgetItem * item);
-    void parseBuffer(const int id, const bool result);
-    void emitLinkClicked(QTreeWidgetItem * item, const int column);
-
 private:
-    QBuffer _buffer;
-    QHttp _http;
-    int _requestId;
-    QXmlStreamReader _xmlReader;
-    QTreeWidgetItem *createChildItem(QTreeWidgetItem *item);
+    void changeFolderIcon(QTreeWidgetItem * item);
+    void emitLinkClicked(QTreeWidgetItem * item, const int column);
     void readFolder(QTreeWidgetItem *item);
     void readPage(QTreeWidgetItem *item);
+    void processContentReply();
+    QTreeWidgetItem *createChildItem(QTreeWidgetItem *item);
 
-    QIcon _webPageDocumentIcon;
-    QIcon _pdfDocumentIcon;
-    QIcon _folderIcon;
-    QIcon _openFolderIcon;
+private:
+    QNetworkAccessManager m_networkAccessManager;
+    QXmlStreamReader m_xmlReader;
+
+    QIcon m_webPageDocumentIcon;
+    QIcon m_pdfDocumentIcon;
+    QIcon m_folderIcon;
+    QIcon m_openFolderIcon;
 };
 
 #endif // IQCONTENTWIDGET_H

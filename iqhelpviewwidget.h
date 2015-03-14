@@ -26,7 +26,6 @@ public:
 
     virtual void forward();
 
-public slots:
     virtual void reload();
 
     virtual void findText(const QString &text);

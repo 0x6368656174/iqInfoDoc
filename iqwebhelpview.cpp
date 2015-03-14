@@ -4,20 +4,20 @@
 
 IqWebHelpView::IqWebHelpView(QWidget *parent) :
     IqHelpViewWidget(parent),
-    _frame(new QFrame()),
-    _webView(new IqWebView())
+    m_frame(new QFrame()),
+    m_webView(new IqWebView())
 {
     QHBoxLayout *layout = new QHBoxLayout();
-    _frame->setLayout(layout);
-    _frame->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    layout->addWidget(_webView);
+    m_frame->setLayout(layout);
+    m_frame->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    layout->addWidget(m_webView);
 
-    connect(_webView, SIGNAL(linkClicked(QUrl)), this, SIGNAL(linkClicked(QUrl)));
-    connect(_webView, SIGNAL(loadProgress(int)), this, SIGNAL(loadProgress(int)));
-    connect(_webView, SIGNAL(loadStarted()), this, SIGNAL(loadStarted()));
-    connect(_webView, SIGNAL(loadFinished(bool)), this, SIGNAL(loadFinished(bool)));
-    connect(_webView->page(), SIGNAL(linkHovered(QString,QString,QString)), this, SIGNAL(linkHovered(QString,QString,QString)));
-    _webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+    connect(m_webView, SIGNAL(linkClicked(QUrl)), this, SIGNAL(linkClicked(QUrl)));
+    connect(m_webView, SIGNAL(loadProgress(int)), this, SIGNAL(loadProgress(int)));
+    connect(m_webView, SIGNAL(loadStarted()), this, SIGNAL(loadStarted()));
+    connect(m_webView, SIGNAL(loadFinished(bool)), this, SIGNAL(loadFinished(bool)));
+    connect(m_webView->page(), SIGNAL(linkHovered(QString,QString,QString)), this, SIGNAL(linkHovered(QString,QString,QString)));
+    m_webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 }
 
 IqWebHelpView::~IqWebHelpView()
@@ -26,7 +26,7 @@ IqWebHelpView::~IqWebHelpView()
 
 QWidget* IqWebHelpView::widget() const
 {
-    return _frame;
+    return m_frame;
 }
 
 bool IqWebHelpView::showPage(const QUrl &url)
@@ -34,7 +34,7 @@ bool IqWebHelpView::showPage(const QUrl &url)
     if (!canShowPage(url))
         return false;
 
-    _webView->load(url);
+    m_webView->load(url);
     return true;
 }
 
@@ -48,40 +48,40 @@ bool IqWebHelpView::canShowPage(const QUrl &url) const
 
 QString IqWebHelpView::title() const
 {
-    return _webView->title();
+    return m_webView->title();
 }
 
 QUrl IqWebHelpView::url() const
 {
-    return _webView->url();
+    return m_webView->url();
 }
 
 void IqWebHelpView::back()
 {
-    _webView->back();
+    m_webView->back();
 }
 
 void IqWebHelpView::forward()
 
 {
-    _webView->forward();
+    m_webView->forward();
 }
 
 void IqWebHelpView::reload()
 {
-    _webView->reload();
+    m_webView->reload();
 }
 
 
 void IqWebHelpView::setZoomFactor(const qreal factor)
 {
-    _webView->setZoomFactor(factor);
+    m_webView->setZoomFactor(factor);
 }
 
 
 void IqWebHelpView::findText(const QString &text)
 {
-    _webView->findText("", QWebPage::HighlightAllOccurrences);
-    _webView->findText(text, QWebPage::HighlightAllOccurrences);
-    _webView->findText(text, QWebPage::FindWrapsAroundDocument);
+    m_webView->findText("", QWebPage::HighlightAllOccurrences);
+    m_webView->findText(text, QWebPage::HighlightAllOccurrences);
+    m_webView->findText(text, QWebPage::FindWrapsAroundDocument);
 }

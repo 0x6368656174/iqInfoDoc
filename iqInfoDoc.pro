@@ -7,7 +7,7 @@
 QT       += core gui network webkit
 
 #INCLUDEPATH += C:/Qt/Projects/poppler/poppler/qt5/src/
-LIBS += -lpoppler-qt4
+#LIBS += -lpoppler-qt4
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets webkitwidgets
 
