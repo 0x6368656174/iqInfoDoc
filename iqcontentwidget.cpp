@@ -34,6 +34,7 @@ void IqContentWidget::loadContent(const QString &url)
 
 void IqContentWidget::emitLinkClicked(QTreeWidgetItem *item, const int column)
 {
+    Q_UNUSED(column);
     QUrl url (item->data(0, Qt::UserRole).toString());
     if (url.isValid())
         emit linkClicked(url);
