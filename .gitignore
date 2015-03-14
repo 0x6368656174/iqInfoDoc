@@ -17,6 +17,7 @@
 *.pro.user
 *.pro.user.*
 *.moc
+automoc_*.cpp
 moc_*.cpp
 qrc_*.cpp
 ui_*.h
