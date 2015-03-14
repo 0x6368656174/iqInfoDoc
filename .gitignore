@@ -26,3 +26,11 @@ Makefile*
 # QtCreator
 
 *.autosave
+
+# Cmake
+CMakeLists.txt.user
+CMakeLists.txt.user.*
+
+# Vim
+*~
+
