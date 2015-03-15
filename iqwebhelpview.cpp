@@ -207,7 +207,7 @@ void IqWebHelpView::showPdf(const QUrl &url)
         return;
     }
 
-    QString pdfjsPath = QCoreApplication::applicationDirPath() + "/pdfjs/web/viewer.html";
+    QString pdfjsPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/pdfjs/web/viewer.html";
     if (!QFile::exists(pdfjsPath)) {
         qWarning() << tr("Not found pdf.js viewer in \"%0\".")
                       .arg(pdfjsPath);

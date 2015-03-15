@@ -36,4 +36,8 @@ FORMS    += iqhelpviewermainwindow.ui \
 
 RESOURCES += \
         icons.qrc \
-        fonts.qrc
+        fonts.qrc \
+        pdfjs.qrc \
+    i18n.qrc
+
+DISTFILES +=

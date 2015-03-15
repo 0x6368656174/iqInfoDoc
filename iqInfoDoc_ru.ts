@@ -423,13 +423,28 @@ Author: Software group, Puckov P.A.</source>
         <translation>Не известный заголовок</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="31"/>
+        <location filename="main.cpp" line="58"/>
         <source>Remove cache from &quot;%0&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="main.cpp" line="35"/>
+        <location filename="main.cpp" line="62"/>
         <source>Unable to remove cache dir from &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="68"/>
+        <source>Unpack pdf.js to &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="71"/>
+        <source>Unable to remove pdf.js dir from &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="76"/>
+        <source>Unbale to copy pdf.js to &quot;%0&quot;.</source>
         <translation></translation>
     </message>
 </context>

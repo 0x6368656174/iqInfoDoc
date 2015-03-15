@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>iqInfoDoc_ru.qm</file>
+    </qresource>
+</RCC>
