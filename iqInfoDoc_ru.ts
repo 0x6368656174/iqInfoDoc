@@ -136,6 +136,19 @@ Author: Software group, Puckov P.A.</source>
     </message>
 </context>
 <context>
+    <name>IqContentWidget</name>
+    <message>
+        <location filename="iqcontentwidget.cpp" line="29"/>
+        <source>Strart load content from&quot;%0&quot;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqcontentwidget.cpp" line="79"/>
+        <source>Content reserved.</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>IqHelpViewerMainWindow</name>
     <message>
         <location filename="iqhelpviewermainwindow.ui" line="14"/>
@@ -260,64 +273,74 @@ Author: Software group, Puckov P.A.</source>
         <translation>О приложении InfoDoc</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="45"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="44"/>
         <source>Scale: </source>
         <translation>Маштаб:</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="72"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="69"/>
         <source>Find: </source>
         <translation>Найти:</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="83"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="81"/>
         <source>lat</source>
         <translation>lat</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="88"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="86"/>
         <source>rus</source>
         <translation>рус</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="147"/>
-        <location filename="iqhelpviewermainwindow.cpp" line="180"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="137"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="165"/>
         <source>1234567890-=\qwertyuiop[]asdfghjkl;&apos;zxcvbnm,./</source>
         <translation>1234567890-=\йцукенгшщзхъфывапролджэячсмитьбю.</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="148"/>
-        <location filename="iqhelpviewermainwindow.cpp" line="181"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="138"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="166"/>
         <source>!@#$%^&amp;*()_+|QWERTYUIOP{}ASDFGHJKL:&quot;ZXCVBNM&lt;&gt;?</source>
         <translation>!&quot;№;%:?*()_+/ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="337"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="191"/>
+        <source>Show page &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqhelpviewermainwindow.cpp" line="223"/>
+        <source>Add url &quot;%0&quot; to history.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqhelpviewermainwindow.cpp" line="312"/>
         <source>Loading%0 %1%...</source>
         <translation>Загрузка %0 %1%...</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="349"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="322"/>
         <source>Start loading%0...</source>
         <translation>Начата загрузка %0...</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="358"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="329"/>
         <source>Loading fauled!</source>
         <translation>Загрузка не удалась!</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="365"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="336"/>
         <source>Lading%0 finish.</source>
         <translation>Загрузка %0 завершена.</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="478"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="447"/>
         <source>About InfoDoc</source>
         <translation>О InfoDoc</translation>
     </message>
     <message>
-        <location filename="iqhelpviewermainwindow.cpp" line="479"/>
+        <location filename="iqhelpviewermainwindow.cpp" line="448"/>
         <source>InfoDoc is cross-platform application to view help information for Sintez R2 ATC system.
 
 Allow to display pages as HTML or PDF formats.
@@ -331,17 +354,45 @@ Author: Software group, Puckov P.A.</source>
     </message>
 </context>
 <context>
-    <name>IqPdfHelpView</name>
+    <name>IqWebHelpView</name>
     <message>
-        <location filename="iqpdfhelpview.cpp" line="93"/>
-        <source>PDF data gets.</source>
+        <location filename="iqwebhelpview.cpp" line="171"/>
+        <source>Create document dir &quot;%0&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="iqpdfhelpview.cpp" line="98"/>
-        <location filename="iqpdfhelpview.cpp" line="117"/>
-        <location filename="iqpdfhelpview.cpp" line="149"/>
-        <source>Error on parse PDF.</source>
+        <location filename="iqwebhelpview.cpp" line="175"/>
+        <source>Unable to create folder &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqwebhelpview.cpp" line="180"/>
+        <source>Open file &quot;%0&quot; for write.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqwebhelpview.cpp" line="185"/>
+        <source>Unable to open &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqwebhelpview.cpp" line="190"/>
+        <source>Write document data in &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqwebhelpview.cpp" line="205"/>
+        <source>Not found PDF document in &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqwebhelpview.cpp" line="212"/>
+        <source>Not found pdf.js viewer in &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="iqwebhelpview.cpp" line="218"/>
+        <source>Show pdf.js viewer on path &quot;%0&quot;.</source>
         <translation></translation>
     </message>
 </context>
@@ -367,9 +418,19 @@ Author: Software group, Puckov P.A.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="iqcontentwidget.cpp" line="83"/>
+        <location filename="iqcontentwidget.cpp" line="52"/>
         <source>Unknown title</source>
         <translation>Не известный заголовок</translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="31"/>
+        <source>Remove cache from &quot;%0&quot;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="35"/>
+        <source>Unable to remove cache dir from &quot;%0&quot;.</source>
+        <translation></translation>
     </message>
 </context>
 </TS>

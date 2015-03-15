@@ -26,6 +26,9 @@ void IqContentWidget::loadContent(const QString &url)
     if(!validUrl.isValid())
         return;
 
+    qDebug() << tr("Strart load content from\"%0\"")
+                .arg(url);
+
     QNetworkRequest request;
     request.setUrl(validUrl);
     QNetworkReply *reply = m_networkAccessManager.get(request);
@@ -73,8 +76,9 @@ void IqContentWidget::processContentReply()
     buffer.setData(reply->readAll());
     reply->deleteLater();
 
-    qDebug() << "Content reserved...\n" << buffer.buffer();
+    qDebug() << tr("Content reserved.");
 
+    buffer.open(QBuffer::ReadOnly);
     m_xmlReader.setDevice(&buffer);
 
     while (m_xmlReader.readNextStartElement()) {

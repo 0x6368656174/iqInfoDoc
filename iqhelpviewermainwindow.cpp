@@ -71,6 +71,7 @@ IqHelpViewerMainWindow::IqHelpViewerMainWindow(QWidget *parent) :
     m_findStringLineEdit->setMaximumWidth(150);
 
     connect(m_findStringLineEdit, &QLineEdit::textChanged, this, &IqHelpViewerMainWindow::rusificateFindString);
+    connect(m_findStringLineEdit, &QLineEdit::textChanged, this, &IqHelpViewerMainWindow::findText);
     connect(m_findStringLineEdit, &QLineEdit::returnPressed, this, &IqHelpViewerMainWindow::findText);
     ui->toolsToolBar->addWidget(m_findStringLineEdit);
 
@@ -100,11 +101,6 @@ IqHelpViewerMainWindow::IqHelpViewerMainWindow(QWidget *parent) :
     IqWebHelpView *webView = new IqWebHelpView(this);
     m_mainWidget->layout()->addWidget(webView->widget());
     m_helpViewWidgets << webView;
-
-//    //PDF view
-//    IqPdfHelpView *pdfVier = new IqPdfHelpView(this);
-//    m_mainWidget->layout()->addWidget(pdfVier->widget());
-//    m_helpViewWidgets << pdfVier;
 
     checkBackForwardEnabled();
 
@@ -192,7 +188,8 @@ QString IqHelpViewerMainWindow::lat(const QString& rus) const
 
 void IqHelpViewerMainWindow::showPage(const QUrl &url)
 {
-    qDebug() << "showPage";
+    qDebug() << tr("Show page \"%0\".")
+                .arg(url.toString());
     IqHelpViewWidget *view = NULL;
 
     if (m_currentView && m_currentView->canShowPage(url)) {
@@ -213,15 +210,18 @@ void IqHelpViewerMainWindow::showPage(const QUrl &url)
     if (view) {
         setCurrentView(view);
 
-        m_urlLineEdit->setText(url.toString());
+        if (view->url() != url) {
+            m_urlLineEdit->setText(url.toString());
 
-        view->showPage(url);
+            view->showPage(url);
+        }
     }
 }
 
 void IqHelpViewerMainWindow::addUrlToHistory(const QUrl &url)
 {
-    qDebug() << "addUrlToHistory";
+    qDebug() << tr("Add url \"%0\" to history.")
+                .arg(url.toString());
     if (!m_backOrForward) {
         for (int i = m_currentHistoryIndex + 1; i < m_history.count(); i++) {
             m_history.removeLast();
@@ -316,8 +316,6 @@ void IqHelpViewerMainWindow::setLoadProgress(const int progress)
 
 void IqHelpViewerMainWindow::onLoadStarted()
 {
-    qDebug() << "onLoadStarted";
-
     if (!m_currentView)
         return;
 
@@ -327,9 +325,7 @@ void IqHelpViewerMainWindow::onLoadStarted()
 
 void IqHelpViewerMainWindow::onLoadFinished(bool ok)
 {
-    qDebug() << "onLoadFinished";
-    if (!ok)
-    {
+    if (!ok) {
         ui->statusBar->showMessage(tr("Loading fauled!"));
         return;
     }
@@ -405,6 +401,11 @@ void IqHelpViewerMainWindow::zoomIn()
 
     if (factorInt < 1 || factorInt > 100000)
         return;
+
+    if (factorInt == factor.toInt()) {
+        m_scaleComboBox->setEditText(QString::number(factorInt * 2));
+        return;
+    }
 
     m_scaleComboBox->setEditText(QString::number(factorInt));
 }
