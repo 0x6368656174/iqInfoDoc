@@ -36,7 +36,7 @@ iqInfoDoc - приложение для просмотра справочной 
 ~~~~~~~~{bash}    
     #------------iqInfoDoc---------------
     cd /sintez/sintez/bin
-    $uexec "./iqInfoDoc > /dev/null 2>&1 &" //Либо "./iqInfoDoc -style=Plastique > /dev/null 2>&1 &" для использования старого стиля
+    $uexec "./iqInfoDoc > /dev/null 2>&1 &" #Либо "./iqInfoDoc -style=Plastique > /dev/null 2>&1 &" для использования старого стиля
 ~~~~~~~~
 * При необходимости отключить автоматический запуск InfoDoc, закомментировать строку `$uexec "java -jar InfoDoc.jar >/dev/null 2>&1 &"` в файле автоматического запуска (см. предыдущий пункт).
 * Перезагрузить все процессы на рабочем месте.
