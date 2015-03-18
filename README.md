@@ -5,7 +5,7 @@ iqInfoDoc - приложение для просмотра справочной 
 Установка iqInfoDoc
 -------------------
 Для установки iqInfoDoc необходимо выполнить следующие действия:
-* Устанавить OpenCSW
+* Устанавить OpenCSW и настроить его для работы с локальным репозиторием
 ~~~~~~{bash}
     cd /
     pkgadd -d http://web/opencsw/pkgutil-i386.pkg
@@ -14,18 +14,18 @@ iqInfoDoc - приложение для просмотра справочной 
     rm pkgutil.conf_localmirror.patch
     /opt/csw/pkgutil -U
 ~~~~~~
-* Устанавливить библиотеки, от которых зависит Qt-5.4.0
+* Установить библиотеки, от которых зависит Qt-5.4.0
 ~~~~~~{bash}
     /opt/csw/pkgutil -iy libstdc++6 libicui18n52 mesalibs libxcb libxrender fontconfig dbus gperf bison flex
 ~~~~~~
-* Устанавливить Qt-5.4.0
+* Скачать и развернуть Qt-5.4.0
 ~~~~~~{bash}
     cd /opt/
     /usr/sfw/bin/wget http://web/iq/iq.tar.gz
     gunzip -c iq.tar.gz | tar xf -
     rm iq.tar.gz
 ~~~~~~
-* Устанавливить iqInfoDoc
+* Скачать iqInfoDoc
 ~~~~~~{bash}
     cd /sintez/sintez/bin/
     /usr/sfw/bin/wget http://web/iq/iqInfoDoc
