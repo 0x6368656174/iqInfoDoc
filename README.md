@@ -29,6 +29,8 @@ iqInfoDoc - приложение для просмотра справочной 
 ~~~~~~{bash}
     cd /sintez/sintez/bin/
     /usr/sfw/bin/wget http://web/iq/iqInfoDoc
+    chown sintez:syn iqInfoDoc
+    chmod 755 iqInfoDoc
 ~~~~~~
 * На целевом рабочем месте запустить и закрыть iqInfoDoc командой */sintez/sintez/bin/iqInfoDoc*. После этого будет создан файл */sintez/sintez/.config/itQuasar/iqInfoDoc.conf* с настройками.
 * Отредактировать настройки в файле */sintez/sintez/.config/itQuasar/iqInfoDoc.conf*.
