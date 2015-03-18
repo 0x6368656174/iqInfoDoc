@@ -7,6 +7,7 @@ iqInfoDoc - приложение для просмотра справочной 
 Для установки iqInfoDoc необходимо выполнить следующие действия:
 * Устанавить OpenCSW и настроить его для работы с локальным репозиторием
 ~~~~~~{bash}
+    su
     cd /
     pkgadd -d http://web/opencsw/pkgutil-i386.pkg
     /usr/sfw/bin/wget http://web/iq/pkgutil.conf_localmirror.patch
@@ -16,10 +17,12 @@ iqInfoDoc - приложение для просмотра справочной 
 ~~~~~~
 * Установить библиотеки, от которых зависит Qt-5.4.0
 ~~~~~~{bash}
+    su
     /opt/csw/pkgutil -iy libstdc++6 libicui18n52 mesalibs libxcb libxrender fontconfig dbus gperf bison flex
 ~~~~~~
 * Скачать и развернуть Qt-5.4.0
 ~~~~~~{bash}
+    su
     cd /opt/
     /usr/sfw/bin/wget http://web/iq/iq.tar.gz
     gunzip -c iq.tar.gz | tar xf -
@@ -27,9 +30,10 @@ iqInfoDoc - приложение для просмотра справочной 
 ~~~~~~
 * Скачать iqInfoDoc
 ~~~~~~{bash}
+    su sintez
     cd /sintez/sintez/bin/
     /usr/sfw/bin/wget http://web/iq/iqInfoDoc
-    chown sintez:syn iqInfoDoc
+    chown sintez:syn iqInfoDoc #Если забыли выйти из под root и скачали файл из под него
     chmod 755 iqInfoDoc
 ~~~~~~
 * На целевом рабочем месте запустить и закрыть iqInfoDoc командой */sintez/sintez/bin/iqInfoDoc*. После этого будет создан файл */sintez/sintez/.config/itQuasar/iqInfoDoc.conf* с настройками.
