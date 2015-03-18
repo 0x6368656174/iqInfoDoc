@@ -5,14 +5,38 @@ iqInfoDoc - приложение для просмотра справочной 
 Установка iqInfoDoc
 -------------------
 Для установки iqInfoDoc необходимо выполнить следующие действия:
-* С рабочего места, на котором установлен iqInfoDoc, скопировать папки */opt/csw* и */sintez/sintez/bin/iqInfoDoc/* в одноименные папки на рабочее место, на которое необходимо установить iqInfoDoc.
-* На целевом рабочем месте запустить и закрыть iqInfoDoc командой *LD_LIBRARY_PATH=/opt/csw/lib /sintez/sintez/bin/iqInfoDoc/iqInfoDoc*. После этого будет создан файл */sintez/sintez/.config/itQuasar/iqInfoDoc.conf* с настройками.
+* Устанавить OpenCSW
+~~~~~~{bash}
+    cd /
+    pkgadd -d http://web/opencsw/pkgutil-i386.pkg
+    /usr/sfw/bin/wget http://web/iq/pkgutil.conf_localmirror.patch
+    gpatch -p1 < pkgutil.conf_localmirror.patch
+    rm pkgutil.conf_localmirror.patch
+    /opt/csw/pkgutil -U
+~~~~~~
+* Устанавливить библиотеки, от которых зависит Qt-5.4.0
+~~~~~~{bash}
+    /opt/csw/pkgutil -iy libstdc++6 libicui18n52 mesalibs libxcb libxrender fontconfig dbus gperf bison flex
+~~~~~~
+* Устанавливить Qt-5.4.0
+~~~~~~{bash}
+    cd /opt/
+    /usr/sfw/bin/wget http://web/iq/iq.tar.gz
+    gunzip -c iq.tar.gz | tar xf -
+    rm iq.tar.gz
+~~~~~~
+* Устанавливить iqInfoDoc
+~~~~~~{bash}
+    cd /sintez/sintez/bin/
+    /usr/sfw/bin/wget http://web/iq/iqInfoDoc
+~~~~~~
+* На целевом рабочем месте запустить и закрыть iqInfoDoc командой */sintez/sintez/bin/iqInfoDoc*. После этого будет создан файл */sintez/sintez/.config/itQuasar/iqInfoDoc.conf* с настройками.
 * Отредактировать настройки в файле */sintez/sintez/.config/itQuasar/iqInfoDoc.conf*.
 * При необходимости добавить iqInfoDoc в автоматический запуск, через startfile. Для этого необходимо отредактировать файл */sintez/sintez/startfile_atd* (для рабочих мест) или */sintez/sintez/startfile_stuk* (для СТУК), добавив в него строки:
 ~~~~~~~~{bash}    
     #------------iqInfoDoc---------------
-    cd /sintez/sintez/bin/iqInfoDoc
-    LD_LIBRARY_PATH=/opt/csw/lib $uexec "./iqInfoDoc -style=Plastique > /dev/null 2>&1 &"
+    cd /sintez/sintez/bin
+    $uexec "./iqInfoDoc > /dev/null 2>&1 &" //Либо "./iqInfoDoc -style=Plastique > /dev/null 2>&1 &" для использования старого стиля
 ~~~~~~~~
 * При необходимости отключить автоматический запуск InfoDoc, закомментировать строку `$uexec "java -jar InfoDoc.jar >/dev/null 2>&1 &"` в файле автоматического запуска (см. предыдущий пункт).
 * Перезагрузить все процессы на рабочем месте.
@@ -45,4 +69,4 @@ iqInfoDoc - приложение для просмотра справочной 
 * `href` - ссылка на страницу. Ссылка может ссылаться либо на html-страницу, либо на pdf-документ. Пути в ссылке должны быть полные, например `http://web/RefAirdrome/wind.htm`.
 
 ###Ограничения html-документов
-В html-документах не должны присутствовать JavaScript-скрипты, т.к. iqInfoDoc, не обрабатывает их. Так же в документах не рекомендуется делать поля для ввода текста на русском языке.
+В документах не рекомендуется делать поля для ввода текста на русском языке.
