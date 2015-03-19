@@ -13,17 +13,17 @@ iqInfoDoc - приложение для просмотра справочной 
     /usr/sfw/bin/wget http://web/iq/pkgutil.conf_localmirror.patch
     gpatch -p1 < pkgutil.conf_localmirror.patch
     rm pkgutil.conf_localmirror.patch
-    /opt/csw/pkgutil -U
+    /opt/csw/bin/pkgutil -U
 ~~~~~~
 * Установить библиотеки, от которых зависит Qt-5.4.0
 ~~~~~~{bash}
     su
-    /opt/csw/pkgutil -iy libstdc++6 libicui18n52 mesalibs libxcb libxrender fontconfig dbus gperf bison flex
+    /opt/csw/bin/pkgutil -iy libstdc++6 libicui18n52 mesalibs libxcb libxrender fontconfig dbus gperf bison flex
 ~~~~~~
 * Скачать и развернуть Qt-5.4.0
 ~~~~~~{bash}
     su
-    cd /opt/
+    cd /
     /usr/sfw/bin/wget http://web/iq/iq.tar.gz
     gunzip -c iq.tar.gz | tar xf -
     rm iq.tar.gz
@@ -41,8 +41,8 @@ iqInfoDoc - приложение для просмотра справочной 
 * При необходимости добавить iqInfoDoc в автоматический запуск, через startfile. Для этого необходимо отредактировать файл */sintez/sintez/startfile_atd* (для рабочих мест) или */sintez/sintez/startfile_stuk* (для СТУК), добавив в него строки:
 ~~~~~~~~{bash}    
     #------------iqInfoDoc---------------
-    cd /sintez/sintez/bin
-    $uexec "./iqInfoDoc > /dev/null 2>&1 &" #Либо "./iqInfoDoc -style=Plastique > /dev/null 2>&1 &" для использования старого стиля
+    cd $SINTEZ_HOME/bin
+    LD_LIBRARY_PATH="" QT_XKB_CONFIG_ROOT=/usr/openwin/lib/X11/xkb $uexec "./iqInfoDoc > /dev/null 2>&1 &" #Либо "./iqInfoDoc -style=Plastique > /dev/null 2>&1 &" для использования старого стиля
 ~~~~~~~~
 * При необходимости отключить автоматический запуск InfoDoc, закомментировать строку `$uexec "java -jar InfoDoc.jar >/dev/null 2>&1 &"` в файле автоматического запуска (см. предыдущий пункт).
 * Перезагрузить все процессы на рабочем месте.
