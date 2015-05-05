@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Content</source>
-        <translation type="obsolete">Содежрание</translation>
+        <translation type="obsolete">Содержание</translation>
     </message>
     <message>
         <source>Tools</source>
@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="obsolete">Найти Следущий</translation>
+        <translation type="obsolete">Найти Следующий</translation>
     </message>
     <message>
         <source>Find next</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Scale: </source>
-        <translation type="obsolete">Маштаб:</translation>
+        <translation type="obsolete">Масштаб:</translation>
     </message>
     <message>
         <source>Find: </source>
@@ -224,7 +224,7 @@ Author: Software group, Puckov P.A.</source>
     <message>
         <location filename="iqhelpviewermainwindow.ui" line="141"/>
         <source>Find Next</source>
-        <translation>Найти Следущий</translation>
+        <translation>Найти Следующий</translation>
     </message>
     <message>
         <location filename="iqhelpviewermainwindow.ui" line="144"/>
@@ -275,7 +275,7 @@ Author: Software group, Puckov P.A.</source>
     <message>
         <location filename="iqhelpviewermainwindow.cpp" line="44"/>
         <source>Scale: </source>
-        <translation>Маштаб:</translation>
+        <translation>Масштаб:</translation>
     </message>
     <message>
         <location filename="iqhelpviewermainwindow.cpp" line="69"/>
@@ -350,7 +350,7 @@ Author: Software group, Puckov P.A.</source>
 
 Позволяет просматривать HTML и PDF страницы.
 
-Автор: Группа Систем и Средств УВД Хабаровской Базовой Службы ЭРТОС, Пучков П.А.  </translation>
+Автор: Группа Систем и Средств УВД Хабаровской Базовой Службы ЭРТОС, Пучков П.А.</translation>
     </message>
 </context>
 <context>
@@ -400,11 +400,11 @@ Author: Software group, Puckov P.A.</source>
     <name>IqWebView</name>
     <message>
         <source>image</source>
-        <translation type="obsolete">изображ</translation>
+        <translation type="obsolete">изображение</translation>
     </message>
     <message>
         <source>new window</source>
-        <translation type="obsolete">окн</translation>
+        <translation type="obsolete">окна</translation>
     </message>
     <message>
         <source>frame</source>
@@ -412,7 +412,7 @@ Author: Software group, Puckov P.A.</source>
     </message>
     <message>
         <source>save</source>
-        <translation type="obsolete">сохран</translation>
+        <translation type="obsolete">сохранить</translation>
     </message>
 </context>
 <context>
