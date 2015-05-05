@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>ContentDockWidget</name>
     <message>
@@ -346,11 +346,11 @@ Author: Software group, Puckov P.A.</source>
 Allow to display pages as HTML or PDF formats.
 
 Author: Software group, Puckov P.A.</source>
-        <translation>InfoDoc -кроссплатформенное  приложение для просмотра справочной информации по системе УВД Синтез Р2.
+        <translation type="unfinished">InfoDoc -кроссплатформенное  приложение для просмотра справочной информации по системе УВД Синтез Р2.
 
 Позволяет просматривать HTML и PDF страницы.
 
-Автор: Группа Систем и Средств УДВ Хабаровской Базовой Службы ЭРТОС, Пучков. П.А.  </translation>
+Автор: Группа Систем и Средств УВД Хабаровской Базовой Службы ЭРТОС, Пучков П.А.  </translation>
     </message>
 </context>
 <context>
